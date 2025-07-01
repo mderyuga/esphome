@@ -62,7 +62,7 @@ namespace esphome
       uint8_t Over = 0xAB;
       size_t i = 0, num = 0;
 
-      this->read_bytes(ESP_LCD_TOUCH_CST328_READ_Number_REG, buf, 1);
+      this->read_bytes16(ESP_LCD_TOUCH_CST328_READ_Number_REG, buf, 1);
       if ((buf[0] & 0x0F) == 0x00)
       {
         this->write_register16(ESP_LCD_TOUCH_CST328_READ_Number_REG, &clear, 1); // No touch data
@@ -77,7 +77,7 @@ namespace esphome
           return;
         }
         /* Read all points */
-        this->read_bytes(ESP_LCD_TOUCH_CST328_READ_XY_REG, &buf[1], 27);
+        this->read_bytes16(ESP_LCD_TOUCH_CST328_READ_XY_REG, &buf[1], 27);
         /* Clear all */
         this->write_register16(ESP_LCD_TOUCH_CST328_READ_Number_REG, &clear, 1);
         esph_log_v(TAG, " points=%d ", touch_cnt);
